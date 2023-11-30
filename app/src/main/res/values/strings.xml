@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileProject</string>
+    <string name="title_activity_menu2">Menu_Activity2</string>
 </resources>
