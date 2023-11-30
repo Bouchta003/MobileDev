@@ -21,5 +21,4 @@ public class Questions {
         this.id=idcounter;
         Questions q1 = new Questions("","","","","","");
     }
-
 }

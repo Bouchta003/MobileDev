@@ -1,6 +1,7 @@
 package Classes;
 
 public class User {
+    //https://jsonplaceholder.org/users
     private int id;
     private static int idcount = 0;
     private String nom;

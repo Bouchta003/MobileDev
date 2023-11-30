@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             if (usertxt != usertest && passtxt != passwordtest) {
                 username.text = null
                 password.text = null
+                fetchdata()
                 Toast.makeText(
                     this@MainActivity,
                     "Invalid username or, please try again",
