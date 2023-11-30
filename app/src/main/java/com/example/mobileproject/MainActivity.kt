@@ -22,13 +22,20 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val usertxt = username.text.toString()
             val passtxt = password.text.toString()
-            if(usertxt!=usertest&&passtxt!=passwordtest){
-                username.text=null
-                password.text=null
-                Toast.makeText(this@MainActivity, "Invalid username or, please try again", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this@MainActivity, "Login successful, welcome !!", Toast.LENGTH_SHORT).show()
+            if (usertxt != usertest && passtxt != passwordtest) {
+                username.text = null
+                password.text = null
+                Toast.makeText(
+                    this@MainActivity,
+                    "Invalid username or, please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Login successful, welcome !!",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
