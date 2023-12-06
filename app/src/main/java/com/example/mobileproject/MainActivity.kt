@@ -6,14 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
-//Alya
-
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //J'inities les variables concernées par l'activité, on utilise VAR et non pas VAL pour qu'elles puissent être modifiées
+        //J'initie les variables concernées par l'activité, on utilise VAR et non pas VAL pour qu'elles puissent être modifiées
         var username = findViewById<EditText>(R.id.username)
         var password = findViewById<EditText>(R.id.password)
         var loginButton = findViewById<Button>(R.id.buttonlogin)
