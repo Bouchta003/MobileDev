@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Menu_Activity2">
-
+    <fragment
+        android:id="@+id/Questions"
+        android:name="com.example.mobileproject.Questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <LinearLayout
         android:layout_width="412dp"
         android:layout_height="58dp"
