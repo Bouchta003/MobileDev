@@ -1,13 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- Image de profil -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_profile_placeholder" <!-- Remplacer avec une image par défaut -->
+    android:layout_gravity="center_horizontal"/>
+
+    <!-- Nom de l'utilisateur -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nom de l'Utilisateur"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"/>
 
-</FrameLayout>
+    <!-- Email de l'utilisateur -->
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:layout_gravity="center_horizontal"/>
+
+    <!-- Score total -->
+    <TextView
+        android:id="@+id/profile_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Score Total : 0"
+        android:layout_gravity="center_horizontal"/>
+
+
+
+</LinearLayout>
