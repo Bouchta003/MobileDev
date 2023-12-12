@@ -1,4 +1,6 @@
 package com.example.mobileproject
+import com.example.mobileproject.databinding.FragmentProfileBinding
+
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,23 +11,36 @@ import android.view.ViewGroup
 
 class ProfileFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
-    private lateinit var viewModel: ProfileViewModel
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Ici, vous allez récupérer et définir les informations de l'utilisateur
+        val userName = "Anna" // Ces valeurs devraient venir d'une source de données, comme une base de données ou une API
+        val userFirstName = "Avetisyan"
+        val userService = "Développement"
+        val userScore = "42"
+
+        binding.textViewName.text = userName
+        binding.textViewFirstName.text = userFirstName
+        binding.textViewService.text = userService
+        binding.textViewScore.text = "Score : $userScore"
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
+
