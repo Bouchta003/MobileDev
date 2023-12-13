@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import kotlin.random.Random
 
+
 /*Dans le fragment ou l'activité ajouter ces lignes de coder
 val url = "https://jsonplaceholder.org/users"
 val networkThread = NetworkThread(url) { yourData ->

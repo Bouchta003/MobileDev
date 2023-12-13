@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-//Ali
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,5 +43,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+    fun fetchdata(): String? {
+        val url = "https://jsonplaceholder.org/users" // Remplacez l'URL par celle de votre API ou source de données
+
+        val client = OkHttpClient() // Définition et initialisation de la variable client
+
+        val request = Request.Builder()
+            .url(url)
+            .build()
+
+        return try {
+            val response: Response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                response.body?.string()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 }
