@@ -25,8 +25,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Ici, vous allez récupérer et définir les informations de l'utilisateur
-        val userName = "Anna" // Ces valeurs devraient venir d'une source de données, comme une base de données ou une API
+
+        val userName = "Anna"
         val userFirstName = "Avetisyan"
         val userService = "Développement"
         val userScore = "42"
