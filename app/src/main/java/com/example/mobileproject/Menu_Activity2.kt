@@ -3,6 +3,8 @@ package com.example.mobileproject
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileproject.ui.theme.AdapterRanking
@@ -14,6 +16,37 @@ class Menu_Activity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu2)
 
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.actualfragment, Menu_Fragment())
+                .commit()
+        }
+
+        val btnStatistics = findViewById<LinearLayout>(R.id.btnStatistics)
+        val btnHome = findViewById<LinearLayout>(R.id.btnHome)
+        val btnProfile = findViewById<LinearLayout>(R.id.btnProfile)
+
+        btnStatistics.setOnClickListener {
+            replaceFragment(StatisticsFragment())
+        }
+
+        btnHome.setOnClickListener {
+            replaceFragment(Menu_Fragment())
+        }
+
+        btnProfile.setOnClickListener {
+            replaceFragment(Score_Quiz_Fragment())
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.actualfragment, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    /*
         val recyclerView: RecyclerView = findViewById(R.id.recyclerview)
 
         val items: MutableList<RankingContent.RankingItem> = ArrayList()
@@ -24,5 +57,6 @@ class Menu_Activity2 : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = AdapterRanking(applicationContext, items)
-    }
+        */
+
 }

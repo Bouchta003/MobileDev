@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.content.Intent
 import android.widget.Toast
-//Ali
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         var password = findViewById<EditText>(R.id.password)
         var loginButton = findViewById<Button>(R.id.buttonlogin)
         //Ces values correspondent aux username/password à tester et vérifier
-        val usertest = "testusername"
-        val passwordtest = "testpassword"
+        val usertest = "test"
+        val passwordtest = "test"
         //Réaction du couton en fonction des inputs username et password:
         loginButton.setOnClickListener {
             val usertxt = username.text.toString()
