@@ -27,7 +27,7 @@ class Menu_Activity2 : AppCompatActivity() {
         val btnProfile = findViewById<LinearLayout>(R.id.btnProfile)
 
         btnStatistics.setOnClickListener {
-            replaceFragment(Reponses())
+            replaceFragment(StatisticsFragment())
         }
 
         btnHome.setOnClickListener {
