@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.content.Intent
 import android.widget.Toast
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,49 +16,23 @@ class MainActivity : AppCompatActivity() {
         var password = findViewById<EditText>(R.id.password)
         var loginButton = findViewById<Button>(R.id.buttonlogin)
         //Ces values correspondent aux username/password à tester et vérifier
-        val usertest = "testusername"
-        val passwordtest = "testpassword"
+        val usertest = "test"
+        val passwordtest = "test"
         //Réaction du couton en fonction des inputs username et password:
         loginButton.setOnClickListener {
             val usertxt = username.text.toString()
             val passtxt = password.text.toString()
-            if (usertxt != usertest && passtxt != passwordtest) {
-                username.text = null
-                password.text = null
-                fetchdata()
-                Toast.makeText(
-                    this@MainActivity,
-                    "Invalid username or, please try again",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Login successful, welcome !!",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if(usertxt!=usertest&&passtxt!=passwordtest){
+                username.text=null
+                password.text=null
+                Toast.makeText(this@MainActivity, "Invalid username or, please try again", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this@MainActivity, "Login successful, welcome !!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Menu_Activity2::class.java)
+                startActivity(intent)
             }
         }
 
-    }
-    fun fetchdata(): String? {
-        val url = "https://jsonplaceholder.org/users" // Remplacez l'URL par celle de votre API ou source de données
-
-        val client = OkHttpClient() // Définition et initialisation de la variable client
-
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        return try {
-            val response: Response = client.newCall(request).execute()
-            if (response.isSuccessful) {
-                response.body?.string()
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            null
-        }
     }
 }
