@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.content.Intent
 import android.widget.Toast
 //Ali
 
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 Toast.makeText(this@MainActivity, "Login successful, welcome !!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Menu_Activity2::class.java)
+                startActivity(intent)
             }
         }
 
