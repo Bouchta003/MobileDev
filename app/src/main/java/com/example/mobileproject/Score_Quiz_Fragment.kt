@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.mobileproject.StatisticsFragment
 
 class Score_Quiz_Fragment : Fragment() {
 
@@ -24,7 +25,8 @@ class Score_Quiz_Fragment : Fragment() {
 
         val btnviewrank = view.findViewById<Button>(R.id.btnviewrank)
         btnviewrank.setOnClickListener {
-            val newFragment = StatisticsFragment.newInstance()
+            val userDataManager = UserDataManager()
+            val newFragment = StatisticsFragment(userDataManager)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)

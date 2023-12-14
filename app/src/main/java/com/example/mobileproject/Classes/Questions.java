@@ -1,4 +1,4 @@
-package Classes;
+package com.example.mobileproject.Classes;
 
 public class Questions {
     private String question;

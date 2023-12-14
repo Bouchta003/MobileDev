@@ -1,4 +1,4 @@
-package Classes;
+package com.example.mobileproject.Classes;
 
 public class User {
     //https://jsonplaceholder.org/users
@@ -10,6 +10,7 @@ public class User {
     private int score;
     private String password;
     private String username;
+    private int rank;
 
 
     public User(String nom, String prenom, String service, String password, String username) {
@@ -21,6 +22,7 @@ public class User {
         idcount++;
         this.id=idcount;
         this.score=0;
+        this.rank = -1;
     }
     public int getId() {
         return id;
@@ -77,6 +79,15 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public void CalculScore(){
 
     }
