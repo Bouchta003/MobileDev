@@ -1,31 +1,24 @@
 package com.example.mobileproject
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileproject.Classes.User
-import com.example.mobileproject.UserDataManager
 
 class StatisticsFragment(private val userDataManager: UserDataManager) : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RankAdapter
     private lateinit var userList: List<User>
-
-
-
 
     companion object {
         fun newInstance(userDataManager: UserDataManager): StatisticsFragment {
             return StatisticsFragment(userDataManager)
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +33,20 @@ class StatisticsFragment(private val userDataManager: UserDataManager) : Fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userList: List<User> = userDataManager.fetchDataAndCreateUsers()
+        userDataManager.fetchDataAndCreateUsers { userList ->
+            activity?.runOnUiThread {
+                if (userList != null) {
+                    this.userList = userList
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = RankAdapter(userList)
+                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+                    val recyclerAdapter = RecyclerAdapter(userList)
+                    recyclerView.adapter = recyclerAdapter
+
+                } else {
+                    // Gestion de l'erreur lors de la récupération des données
+                }
+            }
+        }
     }
 }
