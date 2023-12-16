@@ -10,14 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileproject.Classes.User;
 
+import java.util.Collections;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<User> userList;
 
+    private void initializeRanking(List<User> userList) {
+        // Trier la liste des utilisateurs par score décroissant
+        Collections.sort(userList, (user1, user2) -> Integer.compare(user2.getScore(), user1.getScore()));
+
+        // Donner un classement (rank) à chaque utilisateur
+        for (int i = 0; i < userList.size(); i++) {
+            userList.get(i).setRank(i + 1);
+        }
+    }
+
     public RecyclerAdapter(List<User> userList){
         this.userList = userList;
+        initializeRanking(userList);
 
     }
     @NonNull
@@ -32,10 +44,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.rank.setText(user.getRank());
+        holder.rank.setText(String.valueOf(user.getRank()));
         holder.name.setText(user.getPrenom());
         holder.lastname.setText(user.getNom());
-        holder.score.setText(user.getScore());
+        holder.score.setText(String.valueOf(user.getScore()));
 
     }
 

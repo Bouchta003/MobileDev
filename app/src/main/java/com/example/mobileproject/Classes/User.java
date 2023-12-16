@@ -1,5 +1,8 @@
 package com.example.mobileproject.Classes;
 
+
+import java.util.Random;
+
 public class User {
     //https://jsonplaceholder.org/users
     private int id;
@@ -21,7 +24,9 @@ public class User {
         this.username = username;
         idcount++;
         this.id=idcount;
-        this.score=0;
+        Random random = new Random();
+        int randomScore = random.nextInt(101); // Génère un nombre aléatoire entre 0 et 100 (inclus)
+        this.score = randomScore;
         this.rank = -1;
     }
     public int getId() {

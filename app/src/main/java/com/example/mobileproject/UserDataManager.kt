@@ -10,9 +10,9 @@ import org.json.JSONArray
 
 class UserDataManager {
     fun fetchDataAndCreateUsers(callback: (List<User>?) -> Unit) {
-        val url = "https://jsonplaceholder.org/users" // Remplacez l'URL par celle de votre API ou source de données
+        val url = "https://jsonplaceholder.typicode.com/users"
 
-        val client = OkHttpClient() // Définition et initialisation de la variable client
+        val client = OkHttpClient()
 
         val request = Request.Builder()
             .url(url)
@@ -27,7 +27,6 @@ class UserDataManager {
                     if (statusCode == 200) {
                         val json = response.body?.string()
                         val userList = parseJsonToUserList(json)
-                        // Use a Handler to pass the data to the UI
                         Handler(Looper.getMainLooper()).post {
                             callback(userList)
                         }
@@ -56,10 +55,10 @@ class UserDataManager {
             for (i in 0 until jsonArray.length()) {
                 val userObject = jsonArray.getJSONObject(i)
 
-                val nom = userObject.getString("lastname")
-                val prenom = userObject.getString("firstname")
-                val service = userObject.getString("bs")
-                val password = userObject.getString("password")
+                val nom = userObject.getString("name")
+                val prenom = userObject.getString("username")
+                val service = userObject.getJSONObject("company").getString("bs")
+                val password = userObject.getString("email")
                 val username = userObject.getString("username")
 
                 val user = User(nom, prenom, service, password, username)

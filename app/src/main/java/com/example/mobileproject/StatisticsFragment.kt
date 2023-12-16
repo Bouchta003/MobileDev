@@ -37,9 +37,8 @@ class StatisticsFragment(private val userDataManager: UserDataManager) : Fragmen
             activity?.runOnUiThread {
                 if (userList != null) {
                     this.userList = userList
-
-                    recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                    val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+                    recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+                    recyclerView = view.findViewById(R.id.recyclerView)
                     val recyclerAdapter = RecyclerAdapter(userList)
                     recyclerView.adapter = recyclerAdapter
 
