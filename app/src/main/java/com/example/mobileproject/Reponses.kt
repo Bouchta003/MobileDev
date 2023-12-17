@@ -15,14 +15,14 @@ class Reponses : Fragment() {
     private lateinit var viewModel: ReponsesViewModel
     private lateinit var userDataManager: UserDataManager
     private lateinit var chosenQ: Questions
-    private var someboolean: Boolean = false
+    private var isCorrect: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
         viewModel = ViewModelProvider(requireActivity()).get(ReponsesViewModel::class.java)
         chosenQ = arguments?.getSerializable("chosenQ") as Questions
-        someboolean = arguments?.getBoolean("someBoolean") ?: false
+        isCorrect = arguments?.getBoolean("isCorrect") ?: false
     }
 
     override fun onCreateView(
@@ -35,14 +35,18 @@ class Reponses : Fragment() {
         val rid = view.findViewById<TextView>(R.id.rid)
         val exid = view.findViewById<TextView>(R.id.exid)
         val buttonnext = view.findViewById<Button>(R.id.nextbuttonid)
-        if (someboolean==true){vraifauxID.text="Vrai"
-            vraifauxID.setTextColor(Color.parseColor("#006400"))}
-        else{ vraifauxID.text="Faux"
+
+        if (isCorrect==true){
+            vraifauxID.text="Vrai"
+            vraifauxID.setTextColor(Color.parseColor("#006400"))
+        } else{
+            vraifauxID.text="Faux"
             vraifauxID.setTextColor(Color.RED)
         }
         qid.text=chosenQ.question
-        rid.text=chosenQ.goodanswer
+        rid.text = if (isCorrect) "Correct" else "Incorrect: ${chosenQ.goodanswer}"
         exid.text="Explication : "+chosenQ.justification
+
         buttonnext.setOnClickListener {
             viewModel.counter++
 
@@ -67,11 +71,11 @@ class Reponses : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(chosenQ: com.example.mobileproject.Classes.Questions, someBoolean: Boolean) =
+        fun newInstance(chosenQ: com.example.mobileproject.Classes.Questions, isCorrect: Boolean) =
             Reponses().apply {
                 arguments = Bundle().apply {
                     putSerializable("chosenQ", chosenQ)
-                    putBoolean("someBoolean", someBoolean)
+                    putBoolean("isCorrect", isCorrect)
                 }
             }
     }

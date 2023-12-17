@@ -35,6 +35,7 @@ class Questions : Fragment() {
 
     }
 
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,55 +43,77 @@ class Questions : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_questions, container, false)
         var textView = view.findViewById<TextView>(R.id.questiontxtid)
+
         if(param1==null)
         {textView.text="Question 1"}
         else
         {textView.text="Question "+param1}
+
         //Ini des questions et propositions:
         val randomQuestion = getRandomQuestion()
         val chosenQ=questionsList[randomQuestion]
         selectedQuestions.add(randomQuestion)
+
         //Ini des boutons :
         val buttona = view.findViewById<Button>(R.id.abutton)
         val buttonb = view.findViewById<Button>(R.id.bbuton)
         val buttonc = view.findViewById<Button>(R.id.cbutton)
         val buttond = view.findViewById<Button>(R.id.dbutton)
+
         //Ini Txt
         val texta = view.findViewById<TextView>(R.id.textViewA)
         val textb = view.findViewById<TextView>(R.id.textViewB)
         val textc = view.findViewById<TextView>(R.id.textViewC)
         val textd = view.findViewById<TextView>(R.id.textViewD)
         val textq = view.findViewById<TextView>(R.id.textViewQ)
+
+        // Mélanger les réponses
+        val allAnswers = mutableListOf<String>().apply {
+            add(chosenQ.goodanswer)
+            add(chosenQ.answer2)
+            add(chosenQ.answer3)
+            add(chosenQ.answer4)
+        }.shuffled()
+
         //
         textq.text=chosenQ.question
-        texta.text=chosenQ.goodanswer
-        textb.text=chosenQ.answer2
-        textc.text=chosenQ.answer3
-        textd.text=chosenQ.answer4
+        texta.text = allAnswers[0]
+        textb.text = allAnswers[1]
+        textc.text = allAnswers[2]
+        textd.text = allAnswers[3]
+
         //Pour la personne responsable de la réaction des boutons en fonction de la question:
         //Changer la condition du if de chaque Listener pour vérifier:
         buttona.setOnClickListener {
-            val newFragment = Reponses.newInstance(chosenQ, true)
+            val isCorrect = chosenQ.goodanswer == allAnswers[0]
+            val newFragment = Reponses.newInstance(chosenQ, isCorrect)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
                 .commit()
         }
+
         buttonb.setOnClickListener {
-            val newFragment = Reponses.newInstance(chosenQ, false)
+            val isCorrect = chosenQ.goodanswer ==  allAnswers[1]
+            val newFragment = Reponses.newInstance(chosenQ, isCorrect)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
                 .commit()
         }
+
         buttonc.setOnClickListener {
-            val newFragment = Reponses.newInstance(chosenQ, false)
+            val isCorrect = chosenQ.goodanswer ==  allAnswers[2]
+            val newFragment = Reponses.newInstance(chosenQ, isCorrect)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
-                .commit()}
+                .commit()
+        }
+
         buttond.setOnClickListener {
-            val newFragment = Reponses.newInstance(chosenQ, false)
+            val isCorrect = chosenQ.goodanswer ==  allAnswers[3]
+            val newFragment = Reponses.newInstance(chosenQ, isCorrect)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
