@@ -1,11 +1,13 @@
 package com.example.mobileproject;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileproject.Classes.User;
@@ -54,6 +56,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.name.setText(user.getPrenom());
         holder.lastname.setText(user.getNom());
         holder.score.setText(String.valueOf(user.getScore()));
+
+        if (user.getId() == 0) {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.adminUserColor));
+        } else {
+            // Réinitialiser le style pour les autres utilisateurs
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
+
 
     }
 

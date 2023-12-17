@@ -10,7 +10,7 @@ import org.json.JSONArray
 
 class UserDataManager {
     fun fetchDataAndCreateUsers(callback: (ArrayList<User>?) -> Unit) {
-        val url = "https://jsonplaceholder.typicode.com/users"
+        val url = "https://jsonplaceholder.org/users"
 
         val client = OkHttpClient()
 
@@ -55,11 +55,18 @@ class UserDataManager {
             for (i in 0 until jsonArray.length()) {
                 val userObject = jsonArray.getJSONObject(i)
 
-                val nom = userObject.getString("name")
-                val prenom = userObject.getString("username")
+                /*
+                val fullName = userObject.getString("name")
+                val spaceIndex = fullName.indexOf(" ")
+
+                val prenom = if (spaceIndex != -1) fullName.substring(0, spaceIndex) else fullName
+                val nom = if (spaceIndex != -1) fullName.substring(spaceIndex + 1) else ""
+                */
+                val nom = userObject.getString("lastname")
+                val prenom = userObject.getString("firstname")
                 val service = userObject.getJSONObject("company").getString("bs")
-                val password = userObject.getString("email")
-                val username = userObject.getString("username")
+                val username = userObject.getJSONObject("login").getString("username")
+                val password = userObject.getJSONObject("login").getString("password")
 
                 val user = User(nom, prenom, service, password, username)
                 userList.add(user)
