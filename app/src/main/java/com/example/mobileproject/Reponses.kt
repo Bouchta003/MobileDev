@@ -1,21 +1,28 @@
 package com.example.mobileproject
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.mobileproject.Classes.Questions
 
 class Reponses : Fragment() {
     private lateinit var viewModel: ReponsesViewModel
     private lateinit var userDataManager: UserDataManager
+    private lateinit var chosenQ: Questions
+    private var someboolean: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
         viewModel = ViewModelProvider(requireActivity()).get(ReponsesViewModel::class.java)
+        chosenQ = arguments?.getSerializable("chosenQ") as Questions
+        someboolean = arguments?.getBoolean("someBoolean") ?: false
     }
 
     override fun onCreateView(
@@ -23,8 +30,19 @@ class Reponses : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_reponses, container, false)
-
+        val vraifauxID = view.findViewById<TextView>(R.id.vraifauxID)
+        val qid = view.findViewById<TextView>(R.id.qid)
+        val rid = view.findViewById<TextView>(R.id.rid)
+        val exid = view.findViewById<TextView>(R.id.exid)
         val buttonnext = view.findViewById<Button>(R.id.nextbuttonid)
+        if (someboolean==true){vraifauxID.text="Vrai"
+            vraifauxID.setTextColor(Color.parseColor("#006400"))}
+        else{ vraifauxID.text="Faux"
+            vraifauxID.setTextColor(Color.RED)
+        }
+        qid.text=chosenQ.question
+        rid.text=chosenQ.goodanswer
+        exid.text="Explication : "+chosenQ.justification
         buttonnext.setOnClickListener {
             viewModel.counter++
 
@@ -36,7 +54,7 @@ class Reponses : Fragment() {
                     .addToBackStack(null)
                     .commit()
             } else {
-                val newFragment = Questions.newInstance(viewModel.counter)
+                val newFragment = com.example.mobileproject.Questions.newInstance(viewModel.counter)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.actualfragment, newFragment)
                     .addToBackStack(null)
@@ -49,9 +67,11 @@ class Reponses : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(chosenQ: com.example.mobileproject.Classes.Questions, someBoolean: Boolean) =
             Reponses().apply {
                 arguments = Bundle().apply {
+                    putSerializable("chosenQ", chosenQ)
+                    putBoolean("someBoolean", someBoolean)
                 }
             }
     }
