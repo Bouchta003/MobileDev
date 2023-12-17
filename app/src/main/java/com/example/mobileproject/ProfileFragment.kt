@@ -48,11 +48,13 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateUI(user: User) {
-        binding.textViewName.text = user.nom
-        binding.textViewFirstName.text = user.prenom
-        binding.textViewService.text = user.service
-        // Ici, vous pouvez ajouter plus de mises à jour UI en fonction des données utilisateur
+        val fullName = "${user.nom} ${user.prenom}"
+        binding.textViewName.text = fullName
+        binding.textViewService.text = "Service : ${user.service}"
+        binding.textViewScore.text = "Score : ${user.score}"
+        // Ajoutez ici d'autres mises à jour UI en fonction des données utilisateur si nécessaire
     }
+
 
     private fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
