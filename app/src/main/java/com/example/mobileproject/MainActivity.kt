@@ -1,18 +1,11 @@
 package com.example.mobileproject
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.content.Intent
 import android.widget.Toast
-
-import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-
-import okhttp3.Request
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         var password = findViewById<EditText>(R.id.password)
         var loginButton = findViewById<Button>(R.id.buttonlogin)
         //Ces values correspondent aux username/password à tester et vérifier
-        val usertest = "test"
-        val passwordtest = "test"
+        val usertest = "admin"
+        val passwordtest = "admin"
 
         //Réaction du couton en fonction des inputs username et password:
         loginButton.setOnClickListener {

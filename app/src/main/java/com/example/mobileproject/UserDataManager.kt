@@ -9,7 +9,7 @@ import okhttp3.Response
 import org.json.JSONArray
 
 class UserDataManager {
-    suspend fun fetchDataAndCreateUsers(callback: (List<User>?) -> Unit) {
+    fun fetchDataAndCreateUsers(callback: (List<User>?) -> Unit) {
         val url = "https://jsonplaceholder.typicode.com/users"
 
         val client = OkHttpClient()
