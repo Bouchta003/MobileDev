@@ -7,9 +7,17 @@ import android.widget.EditText
 import android.content.Intent
 import android.widget.Toast
 
+import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
+
+import okhttp3.Request
+import okhttp3.OkHttpClient
+import okhttp3.Response
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main)
         //J'initie les variables concernées par l'activité, on utilise VAR et non pas VAL pour qu'elles puissent être modifiées
         var username = findViewById<EditText>(R.id.username)
@@ -18,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         //Ces values correspondent aux username/password à tester et vérifier
         val usertest = "test"
         val passwordtest = "test"
+
         //Réaction du couton en fonction des inputs username et password:
         loginButton.setOnClickListener {
             val usertxt = username.text.toString()
@@ -31,8 +40,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Login successful, welcome !!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, Menu_Activity2::class.java)
                 startActivity(intent)
+
             }
         }
 
     }
+
+
+
 }
