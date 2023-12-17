@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileproject.ui.theme.AdapterRanking
+import com.example.mobileproject.StatisticsFragment
 
 
 class Menu_Activity2 : AppCompatActivity() {
@@ -27,7 +28,9 @@ class Menu_Activity2 : AppCompatActivity() {
         val btnProfile = findViewById<LinearLayout>(R.id.btnProfile)
 
         btnStatistics.setOnClickListener {
-            replaceFragment(StatisticsFragment())
+            val userDataManager = UserDataManager()
+            val statisticsFragment = StatisticsFragment.newInstance(userDataManager)
+            replaceFragment(statisticsFragment)
         }
 
         btnHome.setOnClickListener {

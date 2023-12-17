@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class Reponses : Fragment() {
     private lateinit var viewModel: ReponsesViewModel
+    private lateinit var userDataManager: UserDataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
