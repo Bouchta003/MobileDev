@@ -14,7 +14,9 @@ val networkThread = NetworkThread(url) { yourData ->
 
 networkThread.start()
 */
-val url = "https://jsonplaceholder.org/users"
+//val url = "https://jsonplaceholder.org/users"
+
+val url ="https://jsonplaceholder.typicode.com/users"
 data class Onlineusers(
     val id: Int,
     val firstname : String,
@@ -24,8 +26,9 @@ data class Onlineusers(
     val score: Int = Random.nextInt(1, 101)
 ){
     override fun toString(): String {
-        return ""//A compléter
+        return "User(id=$id, firstname='$firstname', lastname='$lastname', username='$username', score=$score)"
     }
+
 }
 class NetworkThread(private val url: String, private val callback: (Onlineusers?) -> Unit) : Thread() {
 
