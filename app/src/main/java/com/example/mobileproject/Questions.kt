@@ -1,12 +1,15 @@
 package com.example.mobileproject
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.example.mobileproject.Classes.Questions
+import com.example.mobileproject.Classes.Questions.IniList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +24,8 @@ private const val ARG_PARAM2 = "param2"
 class Questions : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: Int? = null
-
+    private val selectedQuestions = mutableListOf<Int>()
+    val questionsList: List<Questions> = IniList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -30,6 +34,7 @@ class Questions : Fragment() {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,56 +45,73 @@ class Questions : Fragment() {
         {textView.text="Question 1"}
         else
         {textView.text="Question "+param1}
+        //Ini des questions et propositions:
+        val randomQuestion = getRandomQuestion()
+        val chosenQ=questionsList[randomQuestion]
+        selectedQuestions.add(randomQuestion)
+        //Ini des boutons :
         val buttona = view.findViewById<Button>(R.id.abutton)
         val buttonb = view.findViewById<Button>(R.id.bbuton)
         val buttonc = view.findViewById<Button>(R.id.cbutton)
         val buttond = view.findViewById<Button>(R.id.dbutton)
+        //Ini Txt
+        val texta = view.findViewById<TextView>(R.id.textViewA)
+        val textb = view.findViewById<TextView>(R.id.textViewB)
+        val textc = view.findViewById<TextView>(R.id.textViewC)
+        val textd = view.findViewById<TextView>(R.id.textViewD)
+        val textq = view.findViewById<TextView>(R.id.textViewQ)
+        //
+        textq.text=chosenQ.question
+        texta.text=chosenQ.goodanswer
+        textb.text=chosenQ.answer2
+        textc.text=chosenQ.answer3
+        textd.text=chosenQ.answer4
         //Pour la personne responsable de la réaction des boutons en fonction de la question:
         //Changer la condition du if de chaque Listener pour vérifier:
         buttona.setOnClickListener {
-            if(true){
-            val newFragment = Reponses.newInstance("New", "Fragment")
+            val newFragment = Reponses.newInstance(chosenQ, true)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
                 .commit()
-            }
         }
         buttonb.setOnClickListener {
-            if(true){
-            val newFragment = Reponses.newInstance("New", "Fragment")
+            val newFragment = Reponses.newInstance(chosenQ, false)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
                 .commit()
-            }
         }
-        buttonc.setOnClickListener {if(true){
-            val newFragment = Reponses.newInstance("New", "Fragment")
+        buttonc.setOnClickListener {
+            val newFragment = Reponses.newInstance(chosenQ, false)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
                 .commit()}
-        }
-        buttond.setOnClickListener {if(true){
-            val newFragment = Reponses.newInstance("New", "Fragment")
+        buttond.setOnClickListener {
+            val newFragment = Reponses.newInstance(chosenQ, false)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.actualfragment, newFragment)
                 .addToBackStack(null)
-                .commit()}
+                .commit()
         }
         return view
     }
+    private fun getRandomQuestion(): Int {
+        val totalQuestions = questionsList.size
 
+        if (selectedQuestions.size == totalQuestions) {
+            selectedQuestions.clear()
+        }
+        var randomIndex: Int
+        if (questionsList==null||questionsList.size==0){return 0}
+        do {
+            randomIndex = (0 until totalQuestions).random()
+        } while (selectedQuestions.contains(randomIndex))
+
+        return randomIndex
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Questions.
-         */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: Int) =
