@@ -6,11 +6,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileproject.Classes.User
 
-class RankAdapter(private var userList: List<User>) : RecyclerView.Adapter<RankAdapter.ViewHolder>() {
+class RankAdapter(private var userList: ArrayList<User>) : RecyclerView.Adapter<RankAdapter.ViewHolder>() {
 
     init {
         // Trier la liste des utilisateurs par score décroissant
-        userList = userList.sortedByDescending { it.score }
+        userList = userList.sortedByDescending { it.score } as ArrayList<User>
 
         // Donner un classement (rank) à chaque utilisateur
         for ((index, user) in userList.withIndex()) {

@@ -9,7 +9,7 @@ import okhttp3.Response
 import org.json.JSONArray
 
 class UserDataManager {
-    fun fetchDataAndCreateUsers(callback: (List<User>?) -> Unit) {
+    fun fetchDataAndCreateUsers(callback: (ArrayList<User>?) -> Unit) {
         val url = "https://jsonplaceholder.typicode.com/users"
 
         val client = OkHttpClient()
@@ -47,8 +47,8 @@ class UserDataManager {
         networkThread.start()
     }
 
-    private fun parseJsonToUserList(json: String?): List<User>? {
-        val userList = mutableListOf<User>()
+    private fun parseJsonToUserList(json: String?): ArrayList<User>? {
+        val userList = ArrayList<User>()
 
         if (json != null) {
             val jsonArray = JSONArray(json)

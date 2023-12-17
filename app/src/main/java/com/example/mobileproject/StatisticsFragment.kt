@@ -12,7 +12,7 @@ import com.example.mobileproject.Classes.User
 class StatisticsFragment(private val userDataManager: UserDataManager) : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userList: List<User>
+    private lateinit var userList: ArrayList<User>
 
     companion object {
         fun newInstance(userDataManager: UserDataManager): StatisticsFragment {

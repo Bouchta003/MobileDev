@@ -26,6 +26,7 @@ class Questions : Fragment() {
     private var param1: Int? = null
     private val selectedQuestions = mutableListOf<Int>()
     val questionsList: List<Questions> = IniList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
