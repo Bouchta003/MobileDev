@@ -1,5 +1,6 @@
 package com.example.mobileproject
 
+import ProfileFragment
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,7 +39,7 @@ class Menu_Activity2 : AppCompatActivity() {
         }
 
         btnProfile.setOnClickListener {
-            replaceFragment(Score_Quiz_Fragment())
+            replaceFragment(ProfileFragment())
         }
     }
 
