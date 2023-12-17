@@ -14,7 +14,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var userList: List<User>
+    private lateinit var userList: ArrayList<User>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,12 +27,23 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val admin = userList.find{it.id==0}
-        if (admin != null) {
-            updateUI(admin)
+        if (::userList.isInitialized) {
+            val admin = userList.find { it.id == 0 }
+            if (admin != null) {
+                // Utiliser la fonction updateUI pour mettre à jour l'interface utilisateur
+                updateUI(admin)
+            } else {
+                showError("Aucun utilisateur trouvé.")
+            }
         } else {
-            showError("Aucun utilisateur trouvé.")
+            val adminUser = User("Bernard", "Nicolas", "Cybersecurity", "admin", "admin")
+            adminUser.setId(0)
+            adminUser.setScore(45)
+            userList = ArrayList()
+            userList.add(adminUser)
+            updateUI(adminUser)
+
+            showError("Liste d'utilisateurs non initialisée.")
         }
     }
 

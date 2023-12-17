@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 class ProfileViewModel : ViewModel() {
 
     private val userDataManager = UserDataManager()
-    private lateinit var userList: List<User>
+    private lateinit var userList: ArrayList<User>
     var onDataReadyCallback: (() -> Unit)? = null
 
     fun fetchUsers() {

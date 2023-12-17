@@ -28,10 +28,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public RecyclerAdapter(List<User> userList){
-        User admin = new User("Nicolas", "Bernard", "Cybersecurity", "admin", "admin");
-        admin.setId(0);
-        userList.add(admin);
+        User adminUser = new User("Bernard", "Nicolas", "Cybersecurity", "admin", "admin");
+        adminUser.setId(0);
+        adminUser.setScore(45);
 
+        userList.add(adminUser);
         this.userList = userList;
         initializeRanking(userList);
 

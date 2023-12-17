@@ -2,21 +2,25 @@ package com.example.mobileproject
 
 import ProfileFragment
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mobileproject.ui.theme.AdapterRanking
-import com.example.mobileproject.StatisticsFragment
+import com.example.mobileproject.Classes.User
 
 
 class Menu_Activity2 : AppCompatActivity() {
+
+    private lateinit var userList: ArrayList<User>
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu2)
+
+        if (!::userList.isInitialized) {
+            initializeUserList()
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -39,8 +43,20 @@ class Menu_Activity2 : AppCompatActivity() {
         }
 
         btnProfile.setOnClickListener {
+            if (!::userList.isInitialized) {
+                initializeUserList()
+            }
             replaceFragment(ProfileFragment())
         }
+    }
+
+    private fun initializeUserList() {
+        val adminUser = User("Bernard", "Nicolas", "Cybersecurity", "admin", "admin")
+        adminUser.setId(0)
+        adminUser.setScore(45)
+
+        userList = ArrayList()
+        userList.add(adminUser)
     }
 
     private fun replaceFragment(fragment: Fragment) {
