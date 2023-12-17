@@ -28,10 +28,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public RecyclerAdapter(List<User> userList){
+        User admin = new User("Nicolas", "Bernard", "Cybersecurity", "admin", "admin");
+        admin.setId(0);
+        userList.add(admin);
+
         this.userList = userList;
         initializeRanking(userList);
 
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
