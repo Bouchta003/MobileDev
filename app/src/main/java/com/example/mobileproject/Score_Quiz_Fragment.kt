@@ -1,21 +1,21 @@
 package com.example.mobileproject
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.example.mobileproject.StatisticsFragment
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
 class Score_Quiz_Fragment : Fragment() {
 
     companion object {
+        private const val USER_SCORE_KEY = "user_score"
         fun newInstance(score : Int) = Score_Quiz_Fragment().apply{
             arguments = Bundle().apply{
-                putInt("score_key",score)
+                putInt(USER_SCORE_KEY,score)
             }
         }
     }
@@ -28,10 +28,10 @@ class Score_Quiz_Fragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_score__quiz_, container, false)
 
-        val score = arguments?.getInt("score_key") ?: 0
+        val score = arguments?.getInt(USER_SCORE_KEY) ?: 0
 
         val scoreTextView = view.findViewById<TextView>(R.id.scoreView)
-        scoreTextView.text="Score = $score "
+        scoreTextView.text="$score / 10"
 
         val btnviewrank = view.findViewById<Button>(R.id.btnviewrank)
         btnviewrank.setOnClickListener {

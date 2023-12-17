@@ -23,6 +23,10 @@ class Reponses : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(ReponsesViewModel::class.java)
         chosenQ = arguments?.getSerializable("chosenQ") as Questions
         isCorrect = arguments?.getBoolean("isCorrect") ?: false
+
+        if(isCorrect){
+            viewModel.score++
+        }
     }
 
     override fun onCreateView(
