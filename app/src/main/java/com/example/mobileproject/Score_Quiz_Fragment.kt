@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.mobileproject.StatisticsFragment
+import android.widget.TextView
 
 class Score_Quiz_Fragment : Fragment() {
 
     companion object {
-        fun newInstance() = Score_Quiz_Fragment()
+        fun newInstance(score : Int) = Score_Quiz_Fragment().apply{
+            arguments = Bundle().apply{
+                putInt("score_key",score)
+            }
+        }
     }
 
     private lateinit var viewModel: ScoreQuizViewModel
@@ -22,6 +27,11 @@ class Score_Quiz_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_score__quiz_, container, false)
+
+        val score = arguments?.getInt("score_key") ?: 0
+
+        val scoreTextView = view.findViewById<TextView>(R.id.scoreView)
+        scoreTextView.text="Score = $score "
 
         val btnviewrank = view.findViewById<Button>(R.id.btnviewrank)
         btnviewrank.setOnClickListener {

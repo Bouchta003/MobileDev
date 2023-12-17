@@ -36,7 +36,8 @@ class Reponses : Fragment() {
         val exid = view.findViewById<TextView>(R.id.exid)
         val buttonnext = view.findViewById<Button>(R.id.nextbuttonid)
         if (someboolean==true){vraifauxID.text="Vrai"
-            vraifauxID.setTextColor(Color.parseColor("#006400"))}
+            vraifauxID.setTextColor(Color.parseColor("#006400"))
+        viewModel.score++}
         else{ vraifauxID.text="Faux"
             vraifauxID.setTextColor(Color.RED)
         }
@@ -48,7 +49,7 @@ class Reponses : Fragment() {
 
             if (viewModel.counter >= 11) {
                 viewModel.counter = 0
-                val newFragment = Score_Quiz_Fragment.newInstance()
+                val newFragment = Score_Quiz_Fragment.newInstance(viewModel.score)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.actualfragment, newFragment)
                     .addToBackStack(null)
